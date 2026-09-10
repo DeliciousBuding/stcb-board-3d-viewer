@@ -25,5 +25,6 @@ about what the model does and does not prove.
 
 ## License
 
-By contributing, you agree that your contribution is available under the MIT
-License in `LICENSE`, except for third-party material described in `NOTICE.md`.
+By contributing, you agree that your contribution is licensed under the
+Apache License 2.0 in `LICENSE`, except for third-party material described in
+`NOTICE.md`.

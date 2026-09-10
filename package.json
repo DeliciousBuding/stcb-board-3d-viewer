@@ -1,10 +1,10 @@
 {
   "name": "stcb-board-3d-viewer",
   "description": "Embeddable browser digital twin for the STC-B learning board",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "type": "module",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "engines": {
     "node": ">=22.12",
     "pnpm": ">=10"

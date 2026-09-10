@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 /** Layout SSOT: millimetres from PCB top-left, x right / z down.
  * Registered manually against schematic p1 and the assembly photo. Heights are
  * package approximations, NOT metrology. Copper artwork is extracted independently from the reference copper layers; no netlist is inferred.

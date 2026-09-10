@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/DeliciousBuding/stcb-board-3d-viewer/actions/workflows/ci.yml/badge.svg)](https://github.com/DeliciousBuding/stcb-board-3d-viewer/actions/workflows/ci.yml)
 [![Pages](https://github.com/DeliciousBuding/stcb-board-3d-viewer/actions/workflows/pages.yml/badge.svg)](https://github.com/DeliciousBuding/stcb-board-3d-viewer/actions/workflows/pages.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D22.12-339933.svg)](https://nodejs.org/)
 
 [English](README.md) | [简体中文](README.zh-CN.md)
@@ -139,4 +139,4 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md). Report sensitive issues through [`SECU
 
 ## License
 
-Code is released under the [MIT License](LICENSE). Dependency and derived-artwork boundaries are described in [`NOTICE.md`](NOTICE.md).
+Code is released under the [Apache License 2.0](LICENSE). Copyright and third-party or derived-artwork attribution are described in [`NOTICE.md`](NOTICE.md).

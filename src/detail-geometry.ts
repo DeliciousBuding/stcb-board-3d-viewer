@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 /** Small package geometry in millimetres. Decorative radii/fillets are not manufacturing tolerances. */
 import * as THREE from 'three'
 

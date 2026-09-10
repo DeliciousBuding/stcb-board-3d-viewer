@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 import * as THREE from 'three'
 
 function canvasTexture(width: number, height: number, paint: (ctx: CanvasRenderingContext2D) => void) {

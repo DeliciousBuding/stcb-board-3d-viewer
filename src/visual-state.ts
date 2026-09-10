@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 /** Renderer-only state. A future hardware adapter must translate its own protocol explicitly. */
 export type LedColor = 'blue' | 'red' | 'green'
 export type BoardVisualPatch = { -readonly [K in keyof BoardVisualState]?: BoardVisualState[K] }

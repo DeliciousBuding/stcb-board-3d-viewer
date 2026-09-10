@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 /** Camera-independent studio lighting and a denoised linear-light contact-shadow pipeline. */
 import * as THREE from 'three'
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js'

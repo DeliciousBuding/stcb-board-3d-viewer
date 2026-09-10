@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 /** Deterministic, multi-scale manufacturing detail, not photographic evidence. */
 import * as THREE from 'three'
 

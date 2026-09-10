@@ -4,7 +4,7 @@
 
 [![CI](https://github.com/DeliciousBuding/stcb-board-3d-viewer/actions/workflows/ci.yml/badge.svg)](https://github.com/DeliciousBuding/stcb-board-3d-viewer/actions/workflows/ci.yml)
 [![Pages](https://github.com/DeliciousBuding/stcb-board-3d-viewer/actions/workflows/pages.yml/badge.svg)](https://github.com/DeliciousBuding/stcb-board-3d-viewer/actions/workflows/pages.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D22.12-339933.svg)](https://nodejs.org/)
 
 一个可嵌入、可编程的 STC-B 学习板浏览器数字孪生。它使用 Three.js 程序化构建板体、封装、焊点与材质，并将参考装配图和铜箔层作为独立矢量纹理，支持交互检查、正反面查看、拆解，以及数码管和 LED 状态同步。
@@ -144,4 +144,4 @@ python tools/extract_artwork.py \
 
 ## 许可证
 
-代码以 [MIT License](LICENSE) 发布。第三方依赖和派生板卡素材的边界见 [`NOTICE.md`](NOTICE.md)。
+代码以 [Apache License 2.0](LICENSE) 发布。版权、第三方依赖和派生板卡素材归属见 [`NOTICE.md`](NOTICE.md)。

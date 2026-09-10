@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
@@ -8,7 +9,7 @@ import { loadBoardArtwork } from './board-artwork'
 import { BOARD } from './board-layout'
 import { createBoardModel, type BoardPart } from './board-model'
 
-const VIEWER_VERSION = '0.1.1'
+const VIEWER_VERSION = '0.1.2'
 
 document.title = 'STC-B Digital Twin'
 
