@@ -8,7 +8,7 @@ import { loadBoardArtwork } from './board-artwork'
 import { BOARD } from './board-layout'
 import { createBoardModel, type BoardPart } from './board-model'
 
-const VIEWER_VERSION = '0.1.0'
+const VIEWER_VERSION = '0.1.1'
 
 document.title = 'STC-B Digital Twin'
 

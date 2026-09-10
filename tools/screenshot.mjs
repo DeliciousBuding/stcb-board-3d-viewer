@@ -82,7 +82,7 @@ browser = await chromium.launch(launchOptions)
       viewer.setVisualState(before)
       return { version: viewer.version, ready: viewer.ready, before, rejected }
     })
-    assert.equal(api.version, '0.1.0')
+    assert.equal(api.version, '0.1.1')
     assert.equal(api.ready, true)
     assert.equal(api.rejected, true, 'Visual state must reject invalid masks')
     await page.waitForFunction(() => window.stcbBoardViewer.getVisualState().display === '87654321')
