@@ -1,0 +1,23 @@
+# Dependencies and local tool state
+__pycache__/
+*.py[cod]
+node_modules/
+.pnpm-store/
+logs/
+*.log
+
+# Build and test output
+dist/
+dist-ssr/
+artifacts/
+coverage/
+*.local
+
+# Editors and operating systems
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+*.suo
+*.sw?

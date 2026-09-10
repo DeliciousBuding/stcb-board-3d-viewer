@@ -1,0 +1,11 @@
+* text=auto eol=lf
+
+# Keep extracted SVG byte hashes stable across Windows and Unix checkouts.
+public/artwork/*.svg text eol=lf
+
+# Binary documentation and runtime assets
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary

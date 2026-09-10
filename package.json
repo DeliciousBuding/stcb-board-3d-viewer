@@ -1,0 +1,48 @@
+{
+  "name": "stcb-board-3d-viewer",
+  "description": "Embeddable browser digital twin for the STC-B learning board",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.12",
+    "pnpm": ">=10"
+  },
+  "packageManager": "pnpm@10.32.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DeliciousBuding/stcb-board-3d-viewer.git"
+  },
+  "homepage": "https://deliciousbuding.github.io/stcb-board-3d-viewer/",
+  "bugs": {
+    "url": "https://github.com/DeliciousBuding/stcb-board-3d-viewer/issues"
+  },
+  "keywords": [
+    "stc-b",
+    "digital-twin",
+    "threejs",
+    "webgl",
+    "iot",
+    "visualization"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tools/layout.test.mjs tools/visual-state.test.mjs tools/artwork.test.mjs tools/detail-geometry.test.mjs",
+    "test:python": "python -m unittest discover -s tools -p \"test_*.py\"",
+    "check": "pnpm typecheck && pnpm test && pnpm test:python && pnpm build",
+    "preview": "vite preview",
+    "screenshot": "node tools/screenshot.mjs"
+  },
+  "devDependencies": {
+    "@types/three": "^0.185.4",
+    "playwright-core": "^1.63.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.2.2"
+  },
+  "dependencies": {
+    "three": "^0.186.0"
+  }
+}
