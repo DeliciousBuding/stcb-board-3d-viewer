@@ -8,25 +8,24 @@ import type { Component } from './board-layout'
 import { createLedGlowTexture, createDisplayTexture, createMarkingTexture, createRoundTexture } from './textures'
 
 export const materials = {
-  plastic: new THREE.MeshStandardMaterial({ color: 0x101113, roughness: 0.64, bumpMap: surfaceMap('grain'), bumpScale: 0.012 }),
-  rubber: new THREE.MeshStandardMaterial({ color: 0x151618, roughness: 0.92, bumpMap: surfaceMap('grain'), bumpScale: 0.018 }),
-  chip: new THREE.MeshStandardMaterial({ color: 0x191a1c, roughness: 0.76, bumpMap: surfaceMap('grain'), bumpScale: 0.01 }),
-  silver: new THREE.MeshStandardMaterial({ color: 0xaeb4b7, roughness: 0.47, metalness: 1, roughnessMap: surfaceMap('brushed'), bumpMap: surfaceMap('brushed'), bumpScale: 0.004 }),
-  solder: new THREE.MeshStandardMaterial({ color: 0x969ea2, roughness: 0.46, metalness: 1, bumpMap: surfaceMap('grain'), bumpScale: 0.006 }),
-  stamped: new THREE.MeshStandardMaterial({ color: 0xb1b2a4, roughness: 0.5, metalness: 1, roughnessMap: surfaceMap('brushed'), bumpMap: surfaceMap('brushed'), bumpScale: 0.003 }),
-  gold: new THREE.MeshStandardMaterial({ color: 0xa28a52, roughness: 0.44, metalness: 1, roughnessMap: surfaceMap('brushed') }),
-  resistorBase: new THREE.MeshStandardMaterial({ color: 0x747b76, roughness: 0.78, bumpMap: surfaceMap('grain'), bumpScale: 0.004 }),
-  polarity: new THREE.MeshStandardMaterial({ color: 0x278447, roughness: 0.58 }),
-  plated: new THREE.MeshStandardMaterial({ color: 0x697e7c, roughness: 0.53, metalness: 0.8 }),
-  ceramic: new THREE.MeshStandardMaterial({ color: 0xa59070, roughness: 0.7 }),
-  ivory: new THREE.MeshStandardMaterial({ color: 0xc5c5b7, roughness: 0.64 }),
+  plastic: new THREE.MeshPhysicalMaterial({ color: 0x151719, roughness: 0.52, clearcoat: 0.22, clearcoatRoughness: 0.48, bumpMap: surfaceMap('grain'), bumpScale: 0.008 }),
+  rubber: new THREE.MeshStandardMaterial({ color: 0x111214, roughness: 0.92, bumpMap: surfaceMap('grain'), bumpScale: 0.014 }),
+  chip: new THREE.MeshPhysicalMaterial({ color: 0x1b1d20, roughness: 0.62, clearcoat: 0.18, clearcoatRoughness: 0.42, bumpMap: surfaceMap('grain'), bumpScale: 0.006 }),
+  silver: new THREE.MeshStandardMaterial({ color: 0xb7bdc0, roughness: 0.34, metalness: 1, envMapIntensity: 1.25, roughnessMap: surfaceMap('brushed'), bumpMap: surfaceMap('brushed'), bumpScale: 0.0025 }),
+  solder: new THREE.MeshStandardMaterial({ color: 0xa3aaad, roughness: 0.38, metalness: 1, envMapIntensity: 1.2, bumpMap: surfaceMap('grain'), bumpScale: 0.004 }),
+  stamped: new THREE.MeshStandardMaterial({ color: 0xb8b9ad, roughness: 0.38, metalness: 1, envMapIntensity: 1.15, roughnessMap: surfaceMap('brushed'), bumpMap: surfaceMap('brushed'), bumpScale: 0.0025 }),
+  gold: new THREE.MeshStandardMaterial({ color: 0xbe994e, roughness: 0.31, metalness: 1, envMapIntensity: 1.2, roughnessMap: surfaceMap('brushed') }),
+  resistorBase: new THREE.MeshStandardMaterial({ color: 0x78807b, roughness: 0.68, bumpMap: surfaceMap('grain'), bumpScale: 0.003 }),
+  polarity: new THREE.MeshPhysicalMaterial({ color: 0x278447, roughness: 0.5, clearcoat: 0.12, clearcoatRoughness: 0.4 }),
+  plated: new THREE.MeshStandardMaterial({ color: 0x7b8e8c, roughness: 0.42, metalness: 0.85, envMapIntensity: 1.15 }),
+  ceramic: new THREE.MeshStandardMaterial({ color: 0xb19a77, roughness: 0.58 }),
+  ivory: new THREE.MeshPhysicalMaterial({ color: 0xd2d2c5, roughness: 0.55, clearcoat: 0.12, clearcoatRoughness: 0.4 }),
   thermistor: new THREE.MeshPhysicalMaterial({ color: 0x171b17, roughness: 0.3, clearcoat: 0.55, clearcoatRoughness: 0.2 }),
   sensorCan: new THREE.MeshPhysicalMaterial({ color: 0x0d1420, roughness: 0.27, clearcoat: 0.7, clearcoatRoughness: 0.28 }),
   glass: new THREE.MeshPhysicalMaterial({ color: 0xdbe3e5, roughness: 0.12, metalness: 0, transparent: true, opacity: 0.4, depthWrite: false, clearcoat: 1 }),
   diodeGlass: new THREE.MeshPhysicalMaterial({ color: 0xa93713, roughness: 0.24, clearcoat: 0.8, clearcoatRoughness: 0.22 }),
-  red: new THREE.MeshStandardMaterial({ color: 0x815038, roughness: 0.44 }),
+  red: new THREE.MeshPhysicalMaterial({ color: 0x8e3d20, roughness: 0.38, clearcoat: 0.2, clearcoatRoughness: 0.35 }),
 }
-
 const boxCache = new Map<string, THREE.BufferGeometry>()
 export function block(w: number, h: number, d: number, mat: THREE.Material, radius = 0.1) {
   const r = Math.min(radius, w / 2, h / 2, d / 2)
@@ -36,7 +35,7 @@ export function block(w: number, h: number, d: number, mat: THREE.Material, radi
   mesh.castShadow = true; mesh.receiveShadow = true
   return mesh
 }
-function b(g: THREE.Group, w: number, h: number, d: number, x: number, y: number, z: number, mat = materials.plastic, radius = 0.1) {
+function b(g: THREE.Group, w: number, h: number, d: number, x: number, y: number, z: number, mat: THREE.Material = materials.plastic, radius = 0.1) {
   const mesh = block(w, h, d, mat, radius)
   mesh.position.set(x, y, z); g.add(mesh)
   return mesh
@@ -53,7 +52,15 @@ function ring(g: THREE.Group, inner: number, outer: number, x: number, y: number
 }
 function topFace(g: THREE.Group, w: number, d: number, y: number, texture: THREE.Texture, round = false, metallic = false, relief?: THREE.Texture, opening = 0) {
   if (relief) relief.colorSpace = THREE.NoColorSpace
-  const mat = new THREE.MeshStandardMaterial({ map: texture, transparent: !round, roughness: metallic ? 0.48 : 0.72, metalness: metallic ? 1 : 0, bumpMap: relief ?? (metallic ? surfaceMap('brushed') : null), bumpScale: relief ? 0.045 : 0.004, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -1 })
+  const alphaDecal = !round
+  const mat = new THREE.MeshPhysicalMaterial({
+    map: texture, roughness: metallic ? 0.38 : 0.68, metalness: metallic ? 1 : 0,
+    clearcoat: metallic ? 0.08 : 0.12, clearcoatRoughness: metallic ? 0.32 : 0.55,
+    envMapIntensity: metallic ? 1.2 : 0.8,
+    bumpMap: relief ?? (metallic ? surfaceMap('brushed') : null), bumpScale: relief ? 0.035 : 0.003,
+    alphaTest: alphaDecal ? 0.28 : 0, alphaToCoverage: alphaDecal, depthWrite: true,
+    polygonOffset: true, polygonOffsetFactor: -1,
+  })
   const mesh = new THREE.Mesh(round ? (opening ? new THREE.RingGeometry(opening, w / 2, 64) : new THREE.CircleGeometry(w / 2, 64)) : new THREE.PlaneGeometry(w, d), mat)
   mesh.rotation.x = -Math.PI / 2; mesh.position.y = y; g.add(mesh)
   return mesh

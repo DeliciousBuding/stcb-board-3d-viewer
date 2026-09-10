@@ -91,7 +91,7 @@ function addSurfaceDetails(root: THREE.Group) {
     }
   }
   for (const [code, rows] of markings) {
-    const material = new THREE.MeshStandardMaterial({ map: createPassiveMarkingTexture(code), transparent: true, depthWrite: false, roughness: 0.83, polygonOffset: true, polygonOffsetFactor: -1 })
+    const material = new THREE.MeshPhysicalMaterial({ map: createPassiveMarkingTexture(code), roughness: 0.7, clearcoat: 0.08, clearcoatRoughness: 0.5, alphaTest: 0.28, alphaToCoverage: true, depthWrite: true, polygonOffset: true, polygonOffsetFactor: -1 })
     root.add(instances(rows, material, new THREE.PlaneGeometry(1, 1).rotateX(-Math.PI / 2)))
   }
   const solderFillets = instances(fillets, materials.solder, solderFilletGeometry())
@@ -117,13 +117,13 @@ export function createBoardModel(artwork: BoardArtwork) {
   const root = new THREE.Group()
   const frontLayers = boardLayerTextures(artwork), backLayers = boardLayerTextures(artwork, true)
   const maskMaterial = (layers: typeof frontLayers) => new THREE.MeshPhysicalMaterial({
-    map: layers.covered, roughness: 0.9, specularIntensity: 0.14, metalness: 0,
-    roughnessMap: layers.surface, bumpMap: layers.relief, bumpScale: 0.016,
-    clearcoat: 0.045, clearcoatRoughness: 0.65,
+    map: layers.covered, roughness: 0.82, specularIntensity: 0.28, metalness: 0, envMapIntensity: 1.08,
+    roughnessMap: layers.surface, bumpMap: layers.relief, bumpScale: 0.012,
+    clearcoat: 0.1, clearcoatRoughness: 0.48,
   })
   const frontMaterial = maskMaterial(frontLayers), backMaterial = maskMaterial(backLayers)
   const board = new THREE.Mesh(pcbGeometry(), [frontMaterial, backMaterial,
-    new THREE.MeshStandardMaterial({ color: 0x535741, roughness: 0.94, bumpMap: surfaceMap('grain'), bumpScale: 0.014 })])
+    new THREE.MeshPhysicalMaterial({ color: 0x555d43, roughness: 0.88, clearcoat: 0.08, clearcoatRoughness: 0.55, bumpMap: surfaceMap('grain'), bumpScale: 0.01 })])
   board.name = 'pcb'; board.castShadow = true; board.receiveShadow = true; root.add(board)
   for (const [x, z] of BOARD.holes) {
     const rim = new THREE.Mesh(new THREE.RingGeometry(BOARD.holeRadius, BOARD.holeRadius + 0.35, 48), materials.solder)

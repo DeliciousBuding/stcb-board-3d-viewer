@@ -8,27 +8,29 @@ function canvasTexture(width: number, height: number, paint: (ctx: CanvasRenderi
   paint(ctx)
   const texture = new THREE.CanvasTexture(canvas)
   texture.colorSpace = THREE.SRGBColorSpace
-  texture.anisotropy = 8
+  texture.anisotropy = 16
+  texture.magFilter = THREE.LinearFilter
+  texture.minFilter = THREE.LinearMipmapLinearFilter
   return { canvas, ctx, texture }
 }
 
-export function createMarkingTexture(text: string, color = '#797c72') {
-  return canvasTexture(768, 384, (ctx) => {
+export function createMarkingTexture(text: string, color = '#b7bcb1') {
+  return canvasTexture(1024, 512, (ctx) => {
     ctx.fillStyle = color
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
     const lines = text.split('\n')
-    const size = Math.min(85, 560 / Math.max(...lines.map((line) => line.length)) * 1.65)
-    ctx.font = `500 ${size}px Arial, sans-serif`
-    lines.forEach((line, index) => ctx.fillText(line, 384, 192 + (index - (lines.length - 1) / 2) * (size + 16)))
+    const size = Math.min(112, 748 / Math.max(...lines.map((line) => line.length)) * 1.65)
+    ctx.font = `600 ${size}px Arial, sans-serif`
+    lines.forEach((line, index) => ctx.fillText(line, 512, 256 + (index - (lines.length - 1) / 2) * (size + 20)))
   }).texture
 }
 
 /** Compact markings have their own scale; IC-label padding made 0805 codes illegibly tiny. */
 export function createPassiveMarkingTexture(code: string) {
-  return canvasTexture(384, 192, ctx => {
-    ctx.fillStyle = '#b8bcaa'; ctx.font = '500 148px Arial, sans-serif'
-    ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(code, 192, 100, 350)
+  return canvasTexture(512, 256, ctx => {
+    ctx.fillStyle = '#c3c8b8'; ctx.font = '600 196px Arial, sans-serif'
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(code, 256, 132, 468)
   }).texture
 }
 

@@ -212,7 +212,7 @@ browser = await chromium.launch(launchOptions)
       for(let i=0;i<data.length;i+=4){ if(data[i+2]===0)dielectric++; if(data[i+2]===255)copper++; if(data[i+1]>=235)roughInk++ }
       return { width:image.width,height:image.height,dielectric,copper,roughInk,linear:material.metalnessMap.colorSpace==='' }
     })
-    assert.deepEqual([surface.width,surface.height],[1150,900])
+    assert.deepEqual([surface.width,surface.height],[1380,1080])
     assert.ok(surface.dielectric>10000&&surface.copper>10000&&surface.roughInk>100, 'Packed surface map must retain independent substrate, copper and rough silk')
     assert.equal(surface.linear,true,'Material masks are linear data, not sRGB color')
     await toggle('components').click(); await sleep(300)

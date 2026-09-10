@@ -95,17 +95,24 @@ const statusState = document.querySelector<HTMLSpanElement>('#status-state')!
 const scene = new THREE.Scene()
 
 
-const perspectiveCamera = new THREE.PerspectiveCamera(36, 1, 1, 1000)
+const perspectiveCamera = new THREE.PerspectiveCamera(34, 1, 1, 1000)
 const topCamera = new THREE.OrthographicCamera(-60, 60, 45, -45, 0.1, 1000)
 let camera: THREE.PerspectiveCamera | THREE.OrthographicCamera = perspectiveCamera
 camera.position.set(90, 98, 108)
 
+function renderPixelRatio() {
+  const native = window.devicePixelRatio || 1
+  const area = viewport.clientWidth * viewport.clientHeight
+  const supersample = area > 0 && area < 2_200_000 ? 1.25 : 1
+  return Math.min(2, Math.max(native, supersample))
+}
+
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' })
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+renderer.setPixelRatio(renderPixelRatio())
 renderer.shadowMap.enabled = true
 renderer.shadowMap.type = THREE.PCFShadowMap
 renderer.toneMapping = THREE.ACESFilmicToneMapping
-renderer.toneMappingExposure = 0.95
+renderer.toneMappingExposure = 1.04
 renderer.outputColorSpace = THREE.SRGBColorSpace
 viewport.appendChild(renderer.domElement)
 
@@ -351,7 +358,7 @@ function resize() {
   let distance = 171
   for (const x of [homeBounds.min.x, homeBounds.max.x]) for (const y of [homeBounds.min.y, homeBounds.max.y]) for (const z of [homeBounds.min.z, homeBounds.max.z]) {
     const point = new THREE.Vector3(x, y, z).sub(defaultTarget)
-    distance = Math.max(distance, point.dot(homeDirection) + Math.max(Math.abs(point.dot(homeRight)) / (tan * aspect), Math.abs(point.dot(homeUp)) / tan) / 0.88)
+    distance = Math.max(distance, point.dot(homeDirection) + Math.max(Math.abs(point.dot(homeRight)) / (tan * aspect), Math.abs(point.dot(homeUp)) / tan) / 0.92)
   }
   defaultPosition.copy(defaultTarget).addScaledVector(homeDirection, distance)
   controls.maxDistance = Math.max(320, distance * 1.8)
@@ -362,6 +369,7 @@ function resize() {
   topCamera.left = -halfHeight * aspect; topCamera.right = halfHeight * aspect
   topCamera.top = halfHeight; topCamera.bottom = -halfHeight
   topCamera.updateProjectionMatrix()
+  renderer.setPixelRatio(renderPixelRatio())
   renderer.setSize(width, height, false)
   labelRenderer.setSize(width, height)
   studio.resize(width, height)
